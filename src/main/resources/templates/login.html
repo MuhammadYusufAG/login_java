@@ -14,12 +14,16 @@
         <h2>Login Mahasiswa</h2>
         <p th:if="${param.error}">Username atau password salah</p>
         <p th:if="${param.logout}">Anda berhasil logout</p>
+        <p th:if="${param.registered}" style="color: green;">Registrasi berhasil, silakan login</p>
 
         <form th:action="@{/login}" method="post">
             <input type="text" name="username" placeholder="Username" />
             <input type="password" name="password" placeholder="Password" />
             <button type="submit">Login</button>
         </form>
+        <p style="text-align: center; margin-top: 15px;">
+            <a th:href="@{/register}">Belum punya akun? Daftar di sini</a>
+        </p>
     </div>
 </body>
 </html>
