@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; }
+        .box { width: 340px; margin: 80px auto; padding: 24px; background: white; border-radius: 12px; }
+        input { width: 100%; padding: 12px; margin-bottom: 12px; }
+        button { width: 100%; padding: 12px; background: teal; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Login Mahasiswa</h2>
+        <p th:if="${param.error}">Username atau password salah</p>
+        <p th:if="${param.logout}">Anda berhasil logout</p>
+
+        <form th:action="@{/login}" method="post">
+            <input type="text" name="username" placeholder="Username" />
+            <input type="password" name="password" placeholder="Password" />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
