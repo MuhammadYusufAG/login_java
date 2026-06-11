@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Dashboard</title>
 </head>
 <body>
     <h1>Selamat Datang di Dashboard</h1>
-    <a th:href="@{/logout}">Logout</a>
+    
+    <div sec:authorize="hasRole('ADMIN')" style="background-color: #f8d7da; padding: 10px; margin-bottom: 10px;">
+        <p><strong>Menu Khusus Admin:</strong></p>
+        <a th:href="@{/admin/dashboard}">Admin Dashboard</a>
+    </div>
+
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>

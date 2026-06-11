@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Selamat Datang di Halaman Admin</h1>
+    <p>Halaman ini hanya bisa diakses oleh pengguna dengan role ADMIN.</p>
+    
+    <a th:href="@{/dashboard}">Kembali ke Dashboard Utama</a>
+    <br/><br/>
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
