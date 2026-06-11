@@ -1,18 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Portal Mahasiswa</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
 </head>
-<body>
-    <h1>Selamat Datang di Dashboard</h1>
-    
-    <div sec:authorize="hasRole('ADMIN')" style="background-color: #f8d7da; padding: 10px; margin-bottom: 10px;">
-        <p><strong>Menu Khusus Admin:</strong></p>
-        <a th:href="@{/admin/dashboard}">Admin Dashboard</a>
-    </div>
+<body class="bg-slate-50 min-h-screen">
 
-    <form th:action="@{/logout}" method="post" style="display:inline;">
-        <button type="submit">Logout</button>
-    </form>
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-3">
+                        <div class="bg-indigo-600 p-2 rounded-lg shadow-sm">
+                            <i class="fa-solid fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <span class="font-bold text-xl text-gray-900 tracking-tight">Portal Mahasiswa</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 text-gray-600 bg-gray-50 px-4 py-2 rounded-full border border-gray-200">
+                        <i class="fa-regular fa-circle-user text-lg"></i>
+                        <span class="text-sm font-medium" sec:authentication="name">User</span>
+                    </div>
+                    <form th:action="@{/logout}" method="post" class="m-0">
+                        <button type="submit" class="flex items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg font-medium transition-colors border border-red-100 shadow-sm">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Dashboard Utama</h1>
+            <p class="text-gray-500 mt-1">Ringkasan informasi dan akses menu sistem akademik Anda.</p>
+        </div>
+
+        <!-- Welcome Card -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8 relative overflow-hidden">
+            <!-- Decorative Background Element -->
+            <div class="absolute top-0 right-0 -mr-8 -mt-8 w-64 h-64 bg-gradient-to-br from-indigo-100 to-purple-50 rounded-full opacity-50 blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-emerald-100 text-emerald-600 p-3 rounded-full shadow-sm">
+                        <i class="fa-solid fa-hand-wave text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Selamat Datang kembali!</h2>
+                </div>
+                <p class="text-gray-600 max-w-2xl leading-relaxed">
+                    Anda berhasil masuk ke sistem portal mahasiswa. Gunakan menu navigasi untuk mengakses berbagai fitur akademik yang tersedia untuk Anda.
+                </p>
+            </div>
+        </div>
+
+        <!-- Admin Only Card -->
+        <div sec:authorize="hasRole('ADMIN')" class="bg-gradient-to-r from-purple-50 to-fuchsia-50 border border-fuchsia-100 rounded-2xl shadow-sm p-8 relative overflow-hidden group hover:shadow-md transition-shadow">
+            <div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-fuchsia-100/50 to-transparent pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="bg-fuchsia-100 text-fuchsia-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-fuchsia-200 shadow-sm">
+                            Mode Administrator
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Akses Menu Khusus Admin</h3>
+                    <p class="text-gray-600">Kelola pengguna, sistem, dan pengaturan aplikasi secara penuh.</p>
+                </div>
+                <div class="shrink-0">
+                    <a th:href="@{/admin/dashboard}" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 text-white px-6 py-3 rounded-xl font-semibold shadow-md transform hover:-translate-y-0.5 transition-all">
+                        <i class="fa-solid fa-gear"></i>
+                        Masuk Admin Panel
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
 </body>
 </html>
