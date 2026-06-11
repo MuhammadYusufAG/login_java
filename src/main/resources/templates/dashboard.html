@@ -47,6 +47,17 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
+        <!-- Alert Unauthorized Access -->
+        <div th:if="${param.error != null and param.error[0] == 'unauthorized'}" class="mb-6 bg-red-50 border border-red-200 rounded-2xl p-4 flex items-start gap-3 shadow-sm">
+            <div class="bg-red-100 text-red-600 p-2 rounded-lg shrink-0">
+                <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-red-800">Akses Ditolak</h4>
+                <p class="text-sm text-red-600 mt-0.5">Maaf, Anda tidak memiliki izin Administrator untuk mengakses halaman tersebut.</p>
+            </div>
+        </div>
+
         <!-- Header Section -->
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-900">Dashboard Utama</h1>

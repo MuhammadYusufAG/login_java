@@ -41,7 +41,7 @@ public class AuthController {
         user.setUsername(username);
         // Save using BCrypt through delegating password encoder by default or just use the injected encoder
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole("ROLE_USER");
+        user.setRole("USER");
         
         userRepository.save(user);
         
