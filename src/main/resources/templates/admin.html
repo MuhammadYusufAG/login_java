@@ -1,16 +1,133 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Portal Mahasiswa</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
 </head>
-<body>
-    <h1>Selamat Datang di Halaman Admin</h1>
-    <p>Halaman ini hanya bisa diakses oleh pengguna dengan role ADMIN.</p>
-    
-    <a th:href="@{/dashboard}">Kembali ke Dashboard Utama</a>
-    <br/><br/>
-    <form th:action="@{/logout}" method="post" style="display:inline;">
-        <button type="submit">Logout</button>
-    </form>
+<body class="bg-slate-50 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-fuchsia-600 p-2 rounded-lg">
+                        <i class="fa-solid fa-shield-halved text-white text-xl"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight">Admin Panel</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 bg-gray-800 px-4 py-2 rounded-full border border-gray-700">
+                        <i class="fa-solid fa-user-shield text-fuchsia-400"></i>
+                        <span class="text-sm font-medium" sec:authentication="name">Admin</span>
+                    </div>
+                    <form th:action="@{/logout}" method="post" class="m-0">
+                        <button type="submit" class="flex items-center gap-2 bg-gray-800 hover:bg-red-600 px-4 py-2 rounded-lg font-medium transition-colors border border-gray-700 hover:border-red-500">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Header & Action -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Dashboard Administrator</h1>
+                <p class="text-gray-500 mt-1">Halaman eksklusif pengelolaan sistem akademik.</p>
+            </div>
+            <a th:href="@{/dashboard}" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 px-5 py-2.5 rounded-lg border border-gray-200 shadow-sm font-medium transition-colors">
+                <i class="fa-solid fa-arrow-left"></i>
+                Kembali ke Portal
+            </a>
+        </div>
+
+        <!-- Stats Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            
+            <!-- Card 1 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div class="bg-blue-100 text-blue-600 p-4 rounded-xl">
+                    <i class="fa-solid fa-users text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Total Pengguna</p>
+                    <h4 class="text-2xl font-bold text-gray-900">1,248</h4>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div class="bg-fuchsia-100 text-fuchsia-600 p-4 rounded-xl">
+                    <i class="fa-solid fa-user-shield text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Total Admin</p>
+                    <h4 class="text-2xl font-bold text-gray-900">12</h4>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div class="bg-green-100 text-green-600 p-4 rounded-xl">
+                    <i class="fa-solid fa-chart-line text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Aktivitas Hari Ini</p>
+                    <h4 class="text-2xl font-bold text-gray-900">842</h4>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div class="bg-orange-100 text-orange-600 p-4 rounded-xl">
+                    <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Laporan Error</p>
+                    <h4 class="text-2xl font-bold text-gray-900">3</h4>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- System Status Section -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-4 border-b border-gray-100 pb-4">Status Sistem</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-server text-gray-400"></i>
+                        <span class="font-medium text-gray-700">Database Connection</span>
+                    </div>
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Online</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-cloud text-gray-400"></i>
+                        <span class="font-medium text-gray-700">Web Server (Tomcat)</span>
+                    </div>
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Online</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
 </body>
 </html>
